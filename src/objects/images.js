@@ -12,18 +12,18 @@ export class CanvasImage extends CanvasObject {
 
     constructor(image, x = 0, y = 0, width = 0, height = 0) {
         super();
-        this.setImage(image);
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.load(image);
     }
 
     render(ctx) {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 
-    setImage(src) {
+    load(src) {
         this.image.src = src;
         this.image.loading = this.loading;
         this.image.onload = (e) => {

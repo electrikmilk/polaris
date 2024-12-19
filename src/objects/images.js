@@ -4,6 +4,7 @@
 
 import {CanvasBox} from './shapes.js';
 import {CanvasObject} from './object.js';
+import {offWhite} from '../engine/util.js';
 
 export class CanvasImage extends CanvasObject {
     order = 1;
@@ -62,6 +63,11 @@ export class CanvasPattern extends CanvasImage {
 
 export class CanvasBackground extends CanvasBox {
     order = 0;
+
+    constructor(fill = offWhite) {
+        super(0, 0, 0, 0);
+        this.fill = fill;
+    }
 
     init(canvas) {
         this.width = canvas.width;

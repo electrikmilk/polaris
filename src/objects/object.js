@@ -111,7 +111,7 @@ export class CanvasObject {
             ctx.fill();
         }
 
-        if (this.stroke) {
+        if (this.strokeWidth) {
             ctx.lineWidth = this.strokeWidth;
             ctx.strokeStyle = this.stroke;
             ctx.stroke();

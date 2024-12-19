@@ -6,7 +6,7 @@ import {CanvasObject} from './object.js';
 import {offBlack} from '../engine/util.js';
 
 export class CanvasBox extends CanvasObject {
-    constructor(x, y, width, height, fill = offBlack) {
+    constructor(x = 0, y = 0, width = 0, height = 0, fill = offBlack) {
         super();
         this.x = x;
         this.y = y;
@@ -25,7 +25,7 @@ export class CanvasBox extends CanvasObject {
 }
 
 export class CanvasClearBox extends CanvasObject {
-    constructor(x, y, width, height) {
+    constructor(x = 0, y = 0, width = 0, height = 0) {
         super();
         this.x = x;
         this.y = y;
@@ -42,7 +42,7 @@ export class CanvasCircle extends CanvasObject {
     radius = 0;
     shape = 'circle';
 
-    constructor(x, y, radius) {
+    constructor(x = 0, y = 0, radius = 0) {
         super();
         this.x = x;
         this.y = y;

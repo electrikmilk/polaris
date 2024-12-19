@@ -52,7 +52,7 @@ export class CanvasImage extends CanvasObject {
 export class CanvasPattern extends CanvasImage {
     order = 0;
 
-    constructor(x, y, width, height) {
+    constructor(x = 0, y = 0, width = 0, height = 0) {
         super(x, y, width, height);
     }
 

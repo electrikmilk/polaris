@@ -59,7 +59,7 @@ export class Game {
         }
 
         const firstKey = Object.keys(this.scenes)[0];
-        this.load(this.scenes[firstKey]);
+        this.loadScene(firstKey);
     }
 
     loadScene(key) {

@@ -8,6 +8,7 @@ import {initMouse, Mouse} from './mouse.js';
 export class CanvasRenderer {
     canvas;
     ctx;
+    frameRequest;
     width = 640;
     height = 480;
     ratio = 0;
@@ -84,7 +85,7 @@ export class CanvasRenderer {
     // Initiate a canvas draw loop.
     async paint() {
         if (!this.rendering) {
-            window.cancelAnimationFrame(() => this.paint());
+            window.cancelAnimationFrame(this.frameRequest);
             return;
         }
 
@@ -122,6 +123,6 @@ export class CanvasRenderer {
 
         this.restoreCtx();
         await nextFrame();
-        window.requestAnimationFrame(async () => await this.paint());
+        this.frameRequest = window.requestAnimationFrame(async () => await this.paint());
     }
 }

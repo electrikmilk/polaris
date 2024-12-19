@@ -1,4 +1,4 @@
-import {CanvasObject} from './objects.js';
+import {CanvasObject} from './object.js';
 
 export class CanvasText extends CanvasObject {
     order = 1;

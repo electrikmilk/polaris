@@ -12,7 +12,7 @@ export * from './engine/animation.js';
 export * from './engine/physics.js';
 
 /* Objects */
-export * from './objects/objects.js';
+export * from './objects/object.js';
 export * from './objects/object-effects.js';
 export * from './objects/shapes.js';
 export * from './objects/images.js';

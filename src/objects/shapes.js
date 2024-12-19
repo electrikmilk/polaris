@@ -2,7 +2,7 @@
  * Canvas object shapes.
  */
 
-import {CanvasObject} from './objects.js';
+import {CanvasObject} from './object.js';
 
 export class CanvasBox extends CanvasObject {
     constructor(x, y, width, height) {

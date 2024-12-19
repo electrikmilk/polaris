@@ -3,7 +3,7 @@
  */
 
 import {CanvasBox} from './shapes.js';
-import {CanvasObject} from './objects.js';
+import {CanvasObject} from './object.js';
 
 export class CanvasImage extends CanvasObject {
     order = 1;

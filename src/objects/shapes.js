@@ -3,14 +3,16 @@
  */
 
 import {CanvasObject} from './object.js';
+import {offBlack} from '../engine/util.js';
 
 export class CanvasBox extends CanvasObject {
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height, fill = offBlack) {
         super();
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.fill = fill;
     }
 
     render(ctx, canvas) {

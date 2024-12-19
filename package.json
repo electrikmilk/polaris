@@ -1,0 +1,42 @@
+{
+  "name": "polaris",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "watch": "vite build --watch",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.0.3"
+  },
+  "description": "HTML5 Canvas 2D Game Engine",
+  "main": "./src/main.js",
+  "dependencies": {
+    "esbuild": "^0.24.0",
+    "fsevents": "^2.3.3",
+    "nanoid": "^3.3.8",
+    "picocolors": "^1.1.1",
+    "postcss": "^8.4.49",
+    "rollup": "^4.28.1",
+    "source-map-js": "^1.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electrikmilk/polaris.git"
+  },
+  "keywords": [
+    "polaris",
+    "game",
+    "engine",
+    "html5",
+    "canvas"
+  ],
+  "author": "electrikmilk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/electrikmilk/polaris/issues"
+  },
+  "homepage": "https://github.com/electrikmilk/polaris#readme"
+}

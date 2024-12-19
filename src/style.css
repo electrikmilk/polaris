@@ -1,0 +1,6 @@
+.polaris-container {
+    display: flex;
+    place-content: center;
+    place-items: center;
+    border-radius: 4px;
+}

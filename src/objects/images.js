@@ -79,7 +79,7 @@ export class CanvasImageBackground extends CanvasImage {
     order = 0;
 
     constructor(image) {
-        super(image, 0, 0);
+        super(image);
     }
 
     init(canvas) {

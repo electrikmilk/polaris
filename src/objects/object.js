@@ -239,7 +239,7 @@ export class CanvasObject {
         this.animation = new FadeOutAnimation(this, diff).start();
     }
 
-    init(canvas) {
+    init(canvas, ctx) {
         //
     }
 

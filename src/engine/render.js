@@ -78,7 +78,7 @@ export class CanvasRenderer {
 
     // Append a canvas object to the draw loop.
     append(...canvasObj) {
-        canvasObj.forEach(o => o.init(this.canvas));
+        canvasObj.forEach(o => o.init(this.canvas, this.ctx));
         this.objects.push(...canvasObj);
     }
 

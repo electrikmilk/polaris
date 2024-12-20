@@ -97,9 +97,17 @@ export class CanvasText extends CanvasObject {
         let y = this.y;
         for (const line of lines) {
             if (this.fill) {
-                ctx.fillText(line, x, y);
+                if (this.maxWidth) {
+                    ctx.fillText(line, x, y, this.maxWidth);
+                } else {
+                    ctx.fillText(line, x, y);
+                }
             } else {
-                ctx.strokeText(line, x, y);
+                if (this.maxWidth) {
+                    ctx.strokeText(line, x, y, this.maxWidth);
+                } else {
+                    ctx.strokeText(line, x, y);
+                }
             }
             y += 20;
         }

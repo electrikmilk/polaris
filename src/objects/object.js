@@ -10,10 +10,14 @@ import {CanvasShadow} from './object-effects.js';
 
 export class CanvasObject {
     name;
-    invisible = false;
-    hidden = false;
-    shape = 'rectangle';
     objects = {};
+
+    hidden = false;
+    invisible = false;
+
+    shape = 'rectangle';
+    solid = false;
+    boundToViewport = false;
 
     hovering = false;
     clicked = false;
@@ -37,6 +41,7 @@ export class CanvasObject {
     shadow;
 
     animation;
+    flashInterval = null;
 
     debug = false;
     debugColor = debugColors[randInt(0, 2)];
@@ -82,6 +87,46 @@ export class CanvasObject {
     scaleDown(decrement = 10) {
         this.width -= decrement;
         this.height -= decrement;
+    }
+
+    rotate(angle) {
+        this.angle = angle;
+    }
+
+    toggle() {
+        this.hidden = !this.hidden;
+    }
+
+    show() {
+        this.hidden = false;
+    }
+
+    hide() {
+        this.hidden = true;
+    }
+
+    flash(ms = 100, times = 0) {
+        if (!this.visible) {
+            this.visible = true;
+        }
+        let flashed = 0;
+        this.flashInterval = setInterval(() => {
+            this.invisible = !this.invisible;
+            if (times) {
+                flashed++;
+                if (flashed > times) {
+                    this.stopFlashing();
+                }
+            }
+        }, ms);
+    }
+
+    stopFlashing() {
+        if (!this.flashInterval) {
+            return;
+        }
+
+        clearInterval(this.flashInterval);
     }
 
     center(canvas) {

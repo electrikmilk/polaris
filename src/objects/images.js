@@ -52,8 +52,8 @@ export class CanvasImage extends CanvasObject {
 export class CanvasPattern extends CanvasImage {
     order = 0;
 
-    constructor(x = 0, y = 0, width = 0, height = 0) {
-        super(x, y, width, height);
+    constructor(image, x = 0, y = 0, width = 0, height = 0) {
+        super(image, x, y, width, height);
     }
 
     render(ctx, canvas) {

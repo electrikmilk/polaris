@@ -49,12 +49,27 @@ export class CanvasRenderer {
         return this.objects.sort((a, b) => a.order - b.order);
     }
 
+    allObjects() {
+        const orderedObjects = this.objects.sort((a, b) => a.order - b.order);
+
+        let objects = [];
+        for (const object of orderedObjects) {
+            objects.push(object);
+
+            if (object.objects) {
+                objects.push(...Object.values(object.objects));
+            }
+        }
+
+        return objects;
+    }
+
     fadeIn() {
-        this.sortedObjects().forEach(o => o.fadeIn());
+        this.allObjects().forEach(o => o.fadeIn());
     }
 
     fadeOut() {
-        this.sortedObjects().forEach(o => o.fadeOut());
+        this.allObjects().forEach(o => o.fadeOut());
     }
 
     stop() {
@@ -93,36 +108,49 @@ export class CanvasRenderer {
         this.clearScreen();
         this.saveCtx();
 
-        for (const obj of this.sortedObjects()) {
-            if (obj.hidden) {
-                continue;
+        for (const object of this.sortedObjects()) {
+            this.paintObject(object);
+
+            if (!Object.is(object.objects, {})) {
+                Object.values(object.objects).sort(((a, b) => a.order - b.order)).map(subObject => {
+                    const newObject = subObject.clone();
+                    newObject.x = object.x + subObject.x;
+                    newObject.y = object.y + subObject.y;
+                    this.paintObject(newObject);
+                });
             }
-
-            this.saveCtx();
-
-            if (obj.followMouse) {
-                obj.x = Mouse.x - obj.width / 2;
-                obj.y = Mouse.y - obj.height / 2;
-            }
-
-            obj.tick(this.ctx, this.canvas);
-            obj.preEffects(this.ctx, this.canvas);
-            if (!obj.invisible) {
-                obj.render(this.ctx, this.canvas);
-                obj.postEffects(this.ctx);
-            }
-
-            if (obj.debug && DEV_ENV) {
-                obj.renderDebug(this.ctx, this.canvas);
-            }
-
-            obj.checkMouseStates(this.ctx, this.canvas);
-
-            this.restoreCtx();
         }
 
         this.restoreCtx();
         await nextFrame();
         this.frameRequest = window.requestAnimationFrame(async () => await this.paint());
+    }
+
+    paintObject(object) {
+        if (object.hidden) {
+            return;
+        }
+
+        this.saveCtx();
+
+        if (object.followMouse) {
+            object.x = Mouse.x - object.width / 2;
+            object.y = Mouse.y - object.height / 2;
+        }
+
+        object.tick(this.ctx, this.canvas);
+        object.preEffects(this.ctx, this.canvas);
+        if (!object.invisible) {
+            object.render(this.ctx, this.canvas);
+            object.postEffects(this.ctx);
+        }
+
+        if (object.debug && DEV_ENV) {
+            object.renderDebug(this.ctx, this.canvas);
+        }
+
+        object.checkMouseStates(this.ctx, this.canvas);
+
+        this.restoreCtx();
     }
 }

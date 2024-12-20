@@ -13,6 +13,7 @@ export class CanvasObject {
     invisible = false;
     hidden = false;
     shape = 'rectangle';
+    objects = {};
 
     hovering = false;
     clicked = false;
@@ -43,6 +44,10 @@ export class CanvasObject {
     // Runs before each draw frame.
     tick() {
         //
+    }
+
+    clone() {
+        return Object.assign(Object.create(Object.getPrototypeOf(this)), this);
     }
 
     safeAreaTop() {

@@ -10,7 +10,7 @@ import {CanvasShadow} from './object-effects.js';
 
 export class CanvasObject {
     name;
-    visible = true;
+    invisible = false;
     hidden = false;
     shape = 'rectangle';
 
@@ -168,7 +168,7 @@ export class CanvasObject {
         ctx.font = '16px \'Courier, monospace\'';
         ctx.textAlign = 'top';
         ctx.textBaseline = 'top';
-        ctx.fillText(`visible: ${this.visible}`, debugBox.x, debugBox.y + 10);
+        ctx.fillText(`invisible: ${this.invisible}`, debugBox.x, debugBox.y + 10);
         ctx.fillText(`hovering: ${this.hovering}`, debugBox.x, debugBox.y + 30);
         ctx.fillText(`x: ${this.x}`, debugBox.x, debugBox.y + 50);
         ctx.fillText(`y: ${this.y}`, debugBox.x, debugBox.y + 70);

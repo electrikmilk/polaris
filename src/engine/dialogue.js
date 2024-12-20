@@ -42,15 +42,15 @@ export class CanvasDialogueBox {
     }
 
     show() {
-        this.box.visible = true;
-        this.text.visible = true;
-        this.name.visible = true;
+        this.box.invisible = false;
+        this.text.invisible = false;
+        this.name.invisible = false;
     }
 
     hide() {
-        this.box.visible = false;
-        this.text.visible = false;
-        this.name.visible = false;
+        this.box.invisible = true;
+        this.text.invisible = true;
+        this.name.invisible = true;
     }
 
     onEnd(handler) {

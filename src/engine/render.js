@@ -107,7 +107,7 @@ export class CanvasRenderer {
 
             obj.tick(this.ctx, this.canvas);
             obj.preEffects(this.ctx, this.canvas);
-            if (obj.visible) {
+            if (!obj.invisible) {
                 obj.render(this.ctx, this.canvas);
                 obj.postEffects(this.ctx);
             }

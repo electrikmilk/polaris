@@ -10,7 +10,7 @@ import {CanvasShadow} from './object-effects.js';
 
 export class CanvasObject {
     name;
-    objects = {};
+    subObjects = {};
 
     hidden = false;
     invisible = false;

@@ -51,10 +51,8 @@ export class CanvasRenderer {
     }
 
     allObjects() {
-        const orderedObjects = this.objects.sort((a, b) => a.order - b.order);
-
         let objects = [];
-        for (const object of orderedObjects) {
+        for (const object of this.sortedObjects()) {
             objects.push(object);
 
             if (object.subObjects) {

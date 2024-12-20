@@ -17,6 +17,7 @@ export * from './objects/object-effects.js';
 export * from './objects/shapes.js';
 export * from './objects/images.js';
 export * from './objects/text.js';
+export * from './objects/ui.js';
 
 /* Abstractions */
 export * from './engine/keyboard.js';

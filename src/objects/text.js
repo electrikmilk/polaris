@@ -9,13 +9,15 @@ export class CanvasText extends CanvasObject {
     position = 'left top';
     direction;
 
-    constructor(text = 'Text', fill = null) {
+    constructor(text = 'Text', fill = null, x = 0, y = 0) {
         super();
         this.text = text;
 
         if (fill) {
             this.fill = fill;
         }
+        this.x = x;
+        this.y = y;
     }
 
     render(ctx, canvas) {

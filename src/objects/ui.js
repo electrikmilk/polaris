@@ -101,7 +101,6 @@ export class CanvasInput extends CanvasBox {
 
     updateText() {
         this.subObjects.text.text = this.value;
-        console.log(this.value.length);
     }
 
     init(canvas, ctx) {

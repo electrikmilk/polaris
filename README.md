@@ -1,10 +1,12 @@
 # Polaris ✦
 
-Polaris is designed to be an easy-to-use HTML5 canvas 2D game engine.
+Polaris is a WIP HTML5 canvas 2D game engine.
 
-The typical canvas draw loop is abstracted to make drawing on a HTML5 canvas feel more like manipulating HTML DOM.
+Designed to be easy-to-use and quickly get started, the typical canvas draw loop is abstracted to make drawing on an HTML5 canvas feel more like manipulating HTML DOM.
 
 **For example:**
+
+We create a game which we give a HTML selector for where the canvas should go and it's dimensions. We then provide the game with a starting scene which will be automatically loaded as it is the first scene. A scene is provided a renderer unique to that scene, the renderer class handles rendering to the canvas.
 
 ```javascript
 new Game('#game', 640, 480, {
@@ -16,12 +18,11 @@ new Game('#game', 640, 480, {
 })
 ```
 
-Text, images, and shapes can be added to the canvas and continuously rendered by using or extending a class for each
-object. We then append this object to a renderer object that is provided to the scene.
+Text, images, and shapes can be added to the canvas renderer for the scene and continuously rendered. We can extend classes for each
+object to make unique objects like the player character, enemies, etc. We then append this object to a renderer object provided to the scene to draw it.
 
 We can then change their appearance or behavior using properties and methods. These properties and methods can be
-triggered or change their state based on keyboard input and a mouse input abstraction that determines which object the
-user is clicking, hovering, etc. on.
+triggered or change their state based on keyboard input and a mouse input abstraction that determines which object the user is clicking, hovering, etc.
 
 ```javascript
 class RedBox extends CanvasBox {
@@ -40,4 +41,5 @@ class RedBox extends CanvasBox {
 
 - Collision detection
 - Animation
+- UI (textbox, buttons, etc.)
 - Dialogue and characters system (WIP!)

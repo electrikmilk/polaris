@@ -20,6 +20,10 @@ export class CanvasButton extends CanvasRoundedBox {
         this.subObjects.text.y += 15;
     }
 
+    setLabel(newLabel) {
+        this.subObjects.text = newLabel;
+    }
+
     init(canvas, ctx) {
         this.subObjects.text.render(ctx, canvas);
         this.width = ctx.measureText(this.subObjects.text.text).width + 30;

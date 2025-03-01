@@ -33,8 +33,9 @@ export class CanvasButton extends CanvasRoundedBox {
     }
 }
 
-export class CanvasInput extends CanvasBox {
+export class CanvasInput extends CanvasRoundedBox {
     fill = offWhite;
+    radius = 5;
     shadow = new CanvasShadow('rgba(0,0,0,0.3)', 10);
     focused = false;
     value = '';

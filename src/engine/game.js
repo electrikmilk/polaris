@@ -3,7 +3,7 @@
  */
 
 import playButtonIcon from '../assets/play.svg';
-import {offBlack} from './util.js';
+import {COLOR_BLACK} from './util.js';
 
 export class Game {
     container;
@@ -27,7 +27,7 @@ export class Game {
         this.container.classList.add('polaris-container');
         this.container.style.width = width + 'px';
         this.container.style.height = height + 'px';
-        this.container.style.backgroundColor = offBlack;
+        this.container.style.backgroundColor = COLOR_BLACK;
 
         this.canvas = document.createElement('canvas');
         this.canvas.width = width;

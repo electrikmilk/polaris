@@ -1,4 +1,4 @@
-import {empty, offBlack, offWhite} from '../engine/util.js';
+import {COLOR_BLACK, COLOR_WHITE, empty} from '../engine/util.js';
 import {CanvasBox, CanvasRoundedBox} from './shapes.js';
 import {CanvasText} from './text.js';
 import {CanvasShadow} from './object-effects.js';
@@ -7,12 +7,12 @@ export class CanvasButton extends CanvasRoundedBox {
     fill = '#f17619';
     radius = 5;
     shadow = new CanvasShadow('rgba(0,0,0,0.3)', 10);
-    subObjects = {text: new CanvasText('Text', offBlack)};
+    subObjects = {text: new CanvasText('Text', COLOR_BLACK)};
 
     constructor(label = null, x = 0, y = 0) {
         super();
         if (label) {
-            this.subObjects.text = new CanvasText(label, offBlack);
+            this.subObjects.text = new CanvasText(label, COLOR_BLACK);
         }
         this.x = x;
         this.y = y;
@@ -40,7 +40,7 @@ export class CanvasButton extends CanvasRoundedBox {
 }
 
 export class CanvasInput extends CanvasRoundedBox {
-    fill = offWhite;
+    fill = COLOR_WHITE;
     radius = 5;
     shadow = new CanvasShadow('rgba(0,0,0,0.3)', 10);
     focused = false;
@@ -56,9 +56,9 @@ export class CanvasInput extends CanvasRoundedBox {
         this.y = y;
 
         this.subObjects = {
-            text: new CanvasText('', offBlack, 15, 15, this.maxTextWidth),
+            text: new CanvasText('', COLOR_BLACK, 15, 15, this.maxTextWidth),
             placeholder: new CanvasText(placeholder, '#ababab', 15, 15, this.maxTextWidth),
-            cursor: new CanvasBox(offBlack, 15, 10, 1, 25),
+            cursor: new CanvasBox(COLOR_BLACK, 15, 10, 1, 25),
         };
         this.subObjects.cursor.hide();
         this.subObjects.cursor.flash(300);

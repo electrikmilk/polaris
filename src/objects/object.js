@@ -2,7 +2,7 @@
  * Canvas drawing abstraction.
  */
 
-import {debugColors, offBlack, offWhite, randInt} from '../engine/util.js';
+import {COLOR_BLACK, COLOR_WHITE, DEBUG_COLORS, randInt} from '../engine/util.js';
 import {colliding} from '../engine/physics.js';
 import {Mouse, MOUSE_DOWN, MOUSE_UP} from '../engine/mouse.js';
 import {FadeInAnimation, FadeOutAnimation} from '../engine/animation.js';
@@ -34,8 +34,8 @@ export class CanvasObject {
     opacity = 100;
     margin = 20;
 
-    fill = offBlack;
-    stroke = offBlack;
+    fill = COLOR_BLACK;
+    stroke = COLOR_BLACK;
     strokeWidth = 0;
     gradient;
     shadow;
@@ -44,7 +44,7 @@ export class CanvasObject {
     flashInterval = null;
 
     debug = false;
-    debugColor = debugColors[randInt(0, 2)];
+    debugColor = DEBUG_COLORS[randInt(0, 2)];
 
     // Runs before each draw frame.
     tick() {
@@ -203,7 +203,7 @@ export class CanvasObject {
         ctx.save();
         ctx.beginPath();
 
-        new CanvasShadow(offWhite, 20).render(ctx);
+        new CanvasShadow(COLOR_WHITE, 20).render(ctx);
 
         ctx.rect(debugBox.x, debugBox.y, debugBox.width, debugBox.height);
         ctx.fillStyle = this.debugColor;
@@ -214,7 +214,7 @@ export class CanvasObject {
         debugBox.x += 10;
 
         ctx.save();
-        ctx.fillStyle = offWhite;
+        ctx.fillStyle = COLOR_WHITE;
         ctx.font = '16px \'Courier, monospace\'';
         ctx.textAlign = 'top';
         ctx.textBaseline = 'top';

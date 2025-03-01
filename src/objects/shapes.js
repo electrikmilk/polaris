@@ -3,10 +3,10 @@
  */
 
 import {CanvasObject} from './object.js';
-import {offBlack} from '../engine/util.js';
+import {COLOR_BLACK} from '../engine/util.js';
 
 export class CanvasBox extends CanvasObject {
-    constructor(fill = offBlack, x = 0, y = 0, width = 0, height = 0) {
+    constructor(fill = COLOR_BLACK, x = 0, y = 0, width = 0, height = 0) {
         super();
         this.fill = fill;
         this.x = x;
@@ -27,7 +27,7 @@ export class CanvasBox extends CanvasObject {
 export class CanvasRoundedBox extends CanvasObject {
     radius = 5;
 
-    constructor(fill = offBlack, x = 0, y = 0, width = 0, height = 0, radius = 0) {
+    constructor(fill = COLOR_BLACK, x = 0, y = 0, width = 0, height = 0, radius = 0) {
         super();
         this.fill = fill;
         this.x = x;
@@ -60,7 +60,7 @@ export class CanvasCircle extends CanvasObject {
     radius = 0;
     shape = 'circle';
 
-    constructor(fill = offBlack, x = 0, y = 0, radius = 0) {
+    constructor(fill = COLOR_BLACK, x = 0, y = 0, radius = 0) {
         super();
         this.fill = fill;
         this.x = x;

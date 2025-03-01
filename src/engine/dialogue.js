@@ -1,6 +1,6 @@
 import {CanvasText} from '../objects/text.js';
 import {CanvasBox} from '../objects/shapes.js';
-import {offBlack, offWhite} from './util.js';
+import {COLOR_BLACK, COLOR_WHITE} from './util.js';
 import {Key} from './keyboard.js';
 
 export class CanvasDialogueBox {
@@ -60,7 +60,7 @@ export class CanvasDialogueBox {
 
 class DialogueBox extends CanvasBox {
     order = 1;
-    fill = offBlack;
+    fill = COLOR_BLACK;
     height = 120;
     opacity = 30;
 
@@ -85,7 +85,7 @@ class DialogueBox extends CanvasBox {
 
 export class CanvasDialogueText extends CanvasText {
     order = 2;
-    fill = offWhite;
+    fill = COLOR_WHITE;
 
     dialogueText;
     char = 0;
@@ -128,7 +128,7 @@ export class CanvasDialogueText extends CanvasText {
 }
 
 export class CanvasDialogueLabel extends CanvasText {
-    fill = offWhite;
+    fill = COLOR_WHITE;
     font = 'Courier, monospace';
 
     constructor(text, position) {

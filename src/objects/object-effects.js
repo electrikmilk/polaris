@@ -2,7 +2,7 @@
  * Special effects for canvas objects.
  */
 
-import {offBlack} from '../engine/util.js';
+import {COLOR_BLACK} from '../engine/util.js';
 
 export class CanvasGradient {
     type = 'linear';
@@ -41,12 +41,12 @@ export class CanvasGradient {
 }
 
 export class CanvasShadow {
-    color = offBlack;
+    color = COLOR_BLACK;
     blur = 0;
     offsetX = 0;
     offsetY = 0;
 
-    constructor(color = offBlack, blur = 0, offsetX = 0, offsetY = 0) {
+    constructor(color = COLOR_BLACK, blur = 0, offsetX = 0, offsetY = 0) {
         this.color = color;
         this.blur = blur;
         this.offsetX = offsetX;

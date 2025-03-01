@@ -110,9 +110,9 @@ export class CanvasInput extends CanvasRoundedBox {
         this.y = y;
 
         this.subObjects = {
-            text: new CanvasText('', COLOR_BLACK, 15, 15, this.maxTextWidth),
-            placeholder: new CanvasText(placeholder, '#ababab', 15, 15, this.maxTextWidth),
-            cursor: new CanvasBox(COLOR_BLACK, 15, 10, 1, 25),
+            text: new CanvasText('', COLOR_BLACK, 15, 16, this.maxTextWidth),
+            placeholder: new CanvasText(placeholder, '#ababab', 15, 16, this.maxTextWidth),
+            cursor: new CanvasBox(COLOR_BLACK, 15, 13, 1, 25),
         };
         this.subObjects.cursor.hide();
         this.subObjects.cursor.flash(300);
@@ -180,7 +180,7 @@ export class CanvasInput extends CanvasRoundedBox {
             }
         }
 
-        this.subObjects.cursor.height = this.height - 20;
+        this.subObjects.cursor.height = this.height - 25;
     }
 
     tick(ctx) {

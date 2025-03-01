@@ -1,10 +1,10 @@
-import {COLOR_BLACK, COLOR_WHITE, empty} from '../engine/util.js';
+import {COLOR_BLACK, COLOR_ORANGE, COLOR_WHITE, empty} from '../engine/util.js';
 import {CanvasBox, CanvasRoundedBox} from './shapes.js';
 import {CanvasText} from './text.js';
 import {CanvasShadow} from './object-effects.js';
 
 export class CanvasButton extends CanvasRoundedBox {
-    fill = '#f17619';
+    fill = COLOR_ORANGE;
     radius = 5;
     shadow = new CanvasShadow('rgba(0,0,0,0.3)', 10);
     subObjects = {text: new CanvasText('Text', COLOR_BLACK)};

@@ -2,6 +2,7 @@ export const DEV_ENV = import.meta.env.DEV;
 export const DEBUG_COLORS = ['#ff00ff', '#00bbff', '#00ff0e'];
 export const COLOR_BLACK = '#121212';
 export const COLOR_WHITE = '#fafafa';
+export const COLOR_ORANGE = '#f17619';
 
 export async function sleep(ms) {
     return await new Promise(resolve => setTimeout(resolve, ms));

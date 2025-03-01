@@ -1,9 +1,12 @@
 import {empty, offBlack, offWhite} from '../engine/util.js';
-import {CanvasBox} from './shapes.js';
+import {CanvasBox, CanvasRoundedBox} from './shapes.js';
 import {CanvasText} from './text.js';
+import {CanvasShadow} from './object-effects.js';
 
-export class CanvasButton extends CanvasBox {
-    fill = offWhite;
+export class CanvasButton extends CanvasRoundedBox {
+    fill = '#f17619';
+    radius = 5;
+    shadow = new CanvasShadow('rgba(0,0,0,0.3)', 10);
     subObjects = {text: new CanvasText('Text', offBlack)};
 
     constructor(label = null) {
@@ -22,7 +25,7 @@ export class CanvasButton extends CanvasBox {
     }
 
     onHover(ctx, canvas) {
-        this.opacity = 80;
+        this.opacity = 90;
     }
 
     onHoverEnd(ctx, canvas) {
@@ -32,8 +35,10 @@ export class CanvasButton extends CanvasBox {
 
 export class CanvasInput extends CanvasBox {
     fill = offWhite;
+    shadow = new CanvasShadow('rgba(0,0,0,0.3)', 10);
     focused = false;
     value = '';
+    stroke = '#c7c7c7';
     strokeWidth = 1;
     cursorIndex = 0;
     maxTextWidth = 0;
@@ -148,7 +153,7 @@ export class CanvasInput extends CanvasBox {
     }
 
     onHover(ctx, canvas) {
-        this.opacity = 90;
+        this.opacity = 97;
     }
 
     onHoverEnd(ctx, canvas) {

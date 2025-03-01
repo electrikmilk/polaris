@@ -24,6 +24,24 @@ export class CanvasBox extends CanvasObject {
     }
 }
 
+export class CanvasRoundedBox extends CanvasObject {
+    radius = 5;
+
+    constructor(fill = offBlack, x = 0, y = 0, width = 0, height = 0, radius = 0) {
+        super();
+        this.fill = fill;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.radius = radius;
+    }
+
+    render(ctx, canvas) {
+        ctx.roundRect(this.x, this.y, this.width, this.height, this.radius);
+    }
+}
+
 export class CanvasClearBox extends CanvasObject {
     constructor(x = 0, y = 0, width = 0, height = 0) {
         super();

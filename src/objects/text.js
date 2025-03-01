@@ -9,7 +9,7 @@ export class CanvasText extends CanvasObject {
     position = 'left top';
     direction;
 
-    constructor(text = 'Text', fill = null, x = 0, y = 0) {
+    constructor(text = 'Text', fill = null, x = 0, y = 0, maxWidth = null, font = 'Helvetica, sans-serif') {
         super();
         this.text = text;
 

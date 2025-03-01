@@ -49,8 +49,8 @@ export class CanvasInput extends CanvasBox {
         this.y = y;
 
         this.subObjects = {
-            text: new CanvasText('', offBlack, 15, 15),
-            placeholder: new CanvasText(placeholder, '#ababab', 15, 15),
+            text: new CanvasText('', offBlack, 15, 15, this.maxTextWidth),
+            placeholder: new CanvasText(placeholder, '#ababab', 15, 15, this.maxTextWidth),
             cursor: new CanvasBox(offBlack, 15, 10, 1, 25),
         };
         this.subObjects.cursor.hide();

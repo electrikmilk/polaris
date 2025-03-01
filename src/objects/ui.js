@@ -39,6 +39,60 @@ export class CanvasButton extends CanvasRoundedBox {
     }
 }
 
+const CHECKED_CHARACTER = '\u2715';
+
+export class CanvasCheckbox extends CanvasRoundedBox {
+    fill = COLOR_WHITE;
+    radius = 5;
+    checked = false;
+    height = 40;
+    width = 40;
+    shadow = new CanvasShadow('rgba(0,0,0,0.3)', 10);
+    subObjects = {text: new CanvasText('', COLOR_BLACK)};
+
+    constructor(checked = false, x = 0, y = 0) {
+        super();
+        this.checked = checked;
+        this.updateState();
+
+        this.x = x;
+        this.y = y;
+        this.subObjects.text.x += 11;
+        this.subObjects.text.y += 9;
+        this.subObjects.text.size = '25px';
+    }
+
+    setLabel(newLabel) {
+        this.subObjects.text = newLabel;
+    }
+
+    updateState() {
+        this.subObjects.text.text = this.checked ? CHECKED_CHARACTER : '';
+        this.fill = this.checked ? COLOR_ORANGE : COLOR_WHITE;
+    }
+
+    init(canvas, ctx) {
+        this.subObjects.text.render(ctx, canvas);
+    }
+
+    onClick(ctx, canvas) {
+        this.checked = !this.checked;
+        this.updateState();
+    }
+
+    onChange(ctx, canvas) {
+        //
+    }
+
+    onHover(ctx, canvas) {
+        this.opacity = 90;
+    }
+
+    onHoverEnd(ctx, canvas) {
+        this.opacity = 100;
+    }
+}
+
 export class CanvasInput extends CanvasRoundedBox {
     fill = COLOR_WHITE;
     radius = 5;

@@ -9,11 +9,13 @@ export class CanvasButton extends CanvasRoundedBox {
     shadow = new CanvasShadow('rgba(0,0,0,0.3)', 10);
     subObjects = {text: new CanvasText('Text', offBlack)};
 
-    constructor(label = null) {
+    constructor(label = null, x = 0, y = 0) {
         super();
         if (label) {
             this.subObjects.text = new CanvasText(label, offBlack);
         }
+        this.x = x;
+        this.y = y;
         this.subObjects.text.x += 15;
         this.subObjects.text.y += 15;
     }

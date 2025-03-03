@@ -110,7 +110,7 @@ export class CanvasRenderer {
         for (const object of this.sortedObjects()) {
             this.paintObject(object);
 
-            if (!Object.is(object.subObjects, {})) {
+            if (!object.hidden && !Object.is(object.subObjects, {})) {
                 Object.values(object.subObjects).sort(((a, b) => a.order - b.order)).map(subObject => {
                     const newObject = subObject.clone();
                     newObject.x = object.x + subObject.x;

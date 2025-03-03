@@ -1,4 +1,4 @@
-import {CanvasRoundedBox} from '../objects/shapes.js';
+import {CanvasBox, CanvasRoundedBox} from '../objects/shapes.js';
 import {CanvasText} from '../objects/text.js';
 import {Key} from './keyboard.js';
 import {COLOR_BLACK, COLOR_WHITE, DEFAULT_SHADOW} from './util.js';
@@ -25,12 +25,14 @@ class CanvasDialogueLabel extends CanvasText {
 class CanvasDialogueText extends CanvasText {
     fill = COLOR_WHITE;
     shadow = DEFAULT_SHADOW;
+    text = '';
 }
 
 export class CanvasDialogueBox extends CanvasRoundedBox {
     subObjects = {
-        characterName: new CanvasDialogueLabel(),
-        dialogueText: new CanvasDialogueText(),
+        characterName: new CanvasDialogueLabel(''),
+        dialogue: new CanvasDialogueText(''),
+        moreDialogueIndicator: new CanvasBox(COLOR_WHITE, 0, 0, 20, 20),
     };
     dialogue = [];
     index = 0;
@@ -52,8 +54,8 @@ export class CanvasDialogueBox extends CanvasRoundedBox {
         this.subObjects.characterName.x += 10;
         this.subObjects.characterName.y += 10;
 
-        this.subObjects.dialogueText.x += 10;
-        this.subObjects.dialogueText.y += 40;
+        this.subObjects.dialogue.x += 10;
+        this.subObjects.dialogue.y += 40;
 
         this.loadCurrentLine();
         Key.down([' '], () => {
@@ -68,11 +70,20 @@ export class CanvasDialogueBox extends CanvasRoundedBox {
 
             this.index++;
             this.loadCurrentLine();
+            if (this.dialogue.length === this.index + 1) {
+                this.subObjects.moreDialogueIndicator.hide();
+            } else {
+                this.subObjects.moreDialogueIndicator.show();
+            }
         });
     }
 
     init(canvas) {
         this.width = (canvas.width / 2) - 20;
+
+        this.subObjects.moreDialogueIndicator.x = (canvas.width / 4) - 20;
+        this.subObjects.moreDialogueIndicator.y = this.height - 30;
+        this.subObjects.moreDialogueIndicator.flash(500);
     }
 
     load(dialogue) {
@@ -92,14 +103,14 @@ export class CanvasDialogueBox extends CanvasRoundedBox {
 
         if (typeof line === 'object') {
             this.subObjects.characterName.text = line.char.name;
-            this.subObjects.dialogueText.text = line.text;
+            this.subObjects.dialogue.text = line.text;
 
             if (line.hasOwnProperty('image')) {
                 this.subObjects.characterImage = new CanvasImage(line.image, this.width - 110, 0, 100, 100);
             }
         } else if (typeof line === 'string') {
             this.subObjects.characterName.text = '';
-            this.subObjects.dialogueText.text = line;
+            this.subObjects.dialogue.text = line;
         }
     }
 }

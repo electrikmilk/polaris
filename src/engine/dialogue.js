@@ -1,147 +1,105 @@
+import {CanvasRoundedBox} from '../objects/shapes.js';
 import {CanvasText} from '../objects/text.js';
-import {CanvasBox} from '../objects/shapes.js';
-import {COLOR_BLACK, COLOR_WHITE} from './util.js';
 import {Key} from './keyboard.js';
+import {COLOR_BLACK, COLOR_WHITE, DEFAULT_SHADOW} from './util.js';
+import {CanvasImage} from '../objects/images.js';
 
-export class CanvasDialogueBox {
-    box;
-    text;
-    name;
-    lines = [];
-    line = 0;
-    onEndHandler = null;
+/*
+standard:
+['line 1','line 2']
 
-    constructor(renderer, lines = [], position = 'bottom') {
-        this.lines = lines;
-        this.box = new DialogueBox(position);
-        this.text = new CanvasDialogueText(lines[0]?.text ?? '', position);
-        this.name = new CanvasDialogueLabel(lines[0]?.name ?? '', position);
+character:
+[
+  {char: Character, image: CanvasImage, text: "Test", onEnd: () => {}}
+]
+*/
 
+class CanvasDialogueLabel extends CanvasText {
+    fill = COLOR_WHITE;
+    shadow = DEFAULT_SHADOW;
+    size = '20px';
+    styles = ['bold'];
+    font = 'Helvetica, sans-serif';
+}
+
+class CanvasDialogueText extends CanvasText {
+    fill = COLOR_WHITE;
+    shadow = DEFAULT_SHADOW;
+}
+
+export class CanvasDialogueBox extends CanvasRoundedBox {
+    subObjects = {
+        characterName: new CanvasDialogueLabel(),
+        dialogueText: new CanvasDialogueText(),
+    };
+    dialogue = [];
+    index = 0;
+    radius = 5;
+    fill = COLOR_BLACK;
+    stroke = COLOR_WHITE;
+    strokeWidth = 2;
+    shadow = DEFAULT_SHADOW;
+
+    constructor(dialogue = [], x = 10, y = 10, width = 500, height = 100) {
+        super();
+        this.load(dialogue);
+
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+
+        this.subObjects.characterName.x += 10;
+        this.subObjects.characterName.y += 10;
+
+        this.subObjects.dialogueText.x += 10;
+        this.subObjects.dialogueText.y += 40;
+
+        this.loadCurrentLine();
         Key.down([' '], () => {
-            if (this.line === (this.lines.length - 1)) {
-                if (this.onEndHandler) {
-                    this.onEndHandler(renderer.ctx, renderer.canvas);
-                }
-
+            if (this.dialogue.length === this.index + 1) {
+                this.hide();
                 return;
             }
 
-            ++this.line;
-            const line = this.lines[this.line];
-
-            this.text.setDialogue(line.text);
-
-            if (line.hasOwnProperty('name')) {
-                this.name.text = line.name;
-            } else {
-                this.name.text = '';
+            if (typeof this.dialogue.length[this.index] === 'object' && this.dialogue[this.index].hasOwnProperty('onEnd')) {
+                this.dialogue.length[this.index].onEnd();
             }
+
+            this.index++;
+            this.loadCurrentLine();
         });
-
-        renderer.append(this.box, this.text, this.name);
-    }
-
-    show() {
-        this.box.invisible = false;
-        this.text.invisible = false;
-        this.name.invisible = false;
-    }
-
-    hide() {
-        this.box.invisible = true;
-        this.text.invisible = true;
-        this.name.invisible = true;
-    }
-
-    onEnd(handler) {
-        this.onEndHandler = handler;
-    }
-}
-
-class DialogueBox extends CanvasBox {
-    order = 1;
-    fill = COLOR_BLACK;
-    height = 120;
-    opacity = 30;
-
-    constructor(position) {
-        super();
-
-        this.x = this.margin;
-        switch (position) {
-            case 'top':
-                this.y = this.margin;
-                break;
-            case 'bottom':
-                this.y = 320;
-                break;
-        }
     }
 
     init(canvas) {
-        this.width = this.marginWidth(canvas);
-    }
-}
-
-export class CanvasDialogueText extends CanvasText {
-    order = 2;
-    fill = COLOR_WHITE;
-
-    dialogueText;
-    char = 0;
-
-    constructor(text, position) {
-        super('');
-        this.dialogueText = text;
-        this.x = this.margin + 25;
-
-        switch (position) {
-            case 'top':
-                this.y = 50;
-                break;
-            case 'bottom':
-                this.y = 355;
-                break;
-        }
+        this.width = (canvas.width / 2) - 20;
     }
 
-    async tick(ctx, canvas) {
-        if (this.text === this.dialogueText) {
-            this.resizeText(ctx);
-            return;
+    load(dialogue) {
+        if (!Array.isArray(dialogue)) {
+            console.warn(`Unable to load dialogue: ${dialogue}`);
+            throw new Error('Dialogue must be an Array');
         }
 
-        this.setText(ctx, this.text + this.dialogueText[this.char]);
+        this.dialogue = dialogue;
+    }
 
-        if (this.char <= this.dialogueText.length) {
-            this.char++;
-            // TODO: Play sound.
+    loadCurrentLine() {
+        const line = this.dialogue[this.index];
+        if (this.subObjects.hasOwnProperty('characterImage')) {
+            delete this.subObjects.characterImage;
         }
-        this.resizeText(ctx);
-    }
 
-    setDialogue(text) {
-        this.text = '';
-        this.char = 0;
-        this.dialogueText = text;
-    }
-}
+        if (typeof line === 'object') {
+            this.subObjects.characterName.text = line.char.name;
+            this.subObjects.dialogueText.text = line.text;
 
-export class CanvasDialogueLabel extends CanvasText {
-    fill = COLOR_WHITE;
-    font = 'Courier, monospace';
-
-    constructor(text, position) {
-        super(text);
-        this.x = this.margin + 25;
-
-        switch (position) {
-            case 'top':
-                this.y = 30;
-                break;
-            case 'bottom':
-                this.y = 330;
-                break;
+            if (line.hasOwnProperty('image')) {
+                this.subObjects.characterImage = new CanvasImage(line.image, this.width - 110, 0, 100, 100);
+            }
+        } else if (typeof line === 'string') {
+            this.subObjects.characterName.text = '';
+            this.subObjects.dialogueText.text = line;
         }
     }
 }

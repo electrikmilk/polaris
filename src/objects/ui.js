@@ -3,10 +3,12 @@ import {CanvasBox, CanvasRoundedBox} from './shapes.js';
 import {CanvasText} from './text.js';
 import {CanvasShadow} from './object-effects.js';
 
+const DEFAULT_UI_SHADOW = new CanvasShadow('rgba(0,0,0,0.3)', 10);
+
 export class CanvasButton extends CanvasRoundedBox {
     fill = COLOR_ORANGE;
     radius = 5;
-    shadow = new CanvasShadow('rgba(0,0,0,0.3)', 10);
+    shadow = DEFAULT_UI_SHADOW;
     subObjects = {text: new CanvasText('Text', COLOR_BLACK)};
 
     constructor(label = null, x = 0, y = 0) {
@@ -47,7 +49,7 @@ export class CanvasCheckbox extends CanvasRoundedBox {
     checked = false;
     height = 40;
     width = 40;
-    shadow = new CanvasShadow('rgba(0,0,0,0.3)', 10);
+    shadow = DEFAULT_UI_SHADOW;
     subObjects = {text: new CanvasText('', COLOR_BLACK)};
 
     constructor(checked = false, x = 0, y = 0) {
@@ -96,7 +98,7 @@ export class CanvasCheckbox extends CanvasRoundedBox {
 export class CanvasInput extends CanvasRoundedBox {
     fill = COLOR_WHITE;
     radius = 5;
-    shadow = new CanvasShadow('rgba(0,0,0,0.3)', 10);
+    shadow = DEFAULT_UI_SHADOW;
     focused = false;
     value = '';
     stroke = '#c7c7c7';

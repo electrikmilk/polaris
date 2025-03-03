@@ -6,6 +6,7 @@ export class CanvasText extends CanvasObject {
     maxWidth;
     font = 'Helvetica, sans-serif';
     size = '18px';
+    styles = [];
     position = 'left top';
     direction;
 
@@ -24,7 +25,7 @@ export class CanvasText extends CanvasObject {
         let txt_x = this.x;
         let txt_y = this.y;
 
-        ctx.font = [this.size, this.font].join(' ');
+        ctx.font = [this.styles.join(' '), this.size, this.font].join(' ');
         if (this.position) {
             let position = this.position.split(' ');
             let x = position[0];

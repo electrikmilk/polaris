@@ -7,6 +7,7 @@ export class CanvasButton extends CanvasRoundedBox {
     radius = 5;
     shadow = DEFAULT_SHADOW;
     subObjects = {text: new CanvasText('Text', COLOR_BLACK)};
+    cursor = 'pointer';
 
     constructor(label = null, x = 0, y = 0) {
         super();
@@ -17,6 +18,7 @@ export class CanvasButton extends CanvasRoundedBox {
         this.y = y;
         this.subObjects.text.x += 15;
         this.subObjects.text.y += 15;
+        this.subObjects.text.cursor = 'pointer';
     }
 
     setLabel(newLabel) {
@@ -48,6 +50,7 @@ export class CanvasCheckbox extends CanvasRoundedBox {
     width = 40;
     shadow = DEFAULT_SHADOW;
     subObjects = {text: new CanvasText('', COLOR_BLACK)};
+    cursor = 'pointer';
 
     constructor(checked = false, x = 0, y = 0) {
         super();
@@ -59,6 +62,7 @@ export class CanvasCheckbox extends CanvasRoundedBox {
         this.subObjects.text.x += 11;
         this.subObjects.text.y += 9;
         this.subObjects.text.size = '25px';
+        this.subObjects.text.cursor = 'pointer';
     }
 
     setLabel(newLabel) {
@@ -216,7 +220,7 @@ export class CanvasInput extends CanvasRoundedBox {
     }
 
     onHover(ctx, canvas) {
-        this.opacity = 97;
+        this.opacity = 90;
     }
 
     onHoverEnd(ctx, canvas) {

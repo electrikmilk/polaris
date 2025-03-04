@@ -90,10 +90,6 @@ export class CanvasObject {
         this.height -= decrement;
     }
 
-    rotate(angle) {
-        this.angle = angle;
-    }
-
     toggle() {
         this.hidden = !this.hidden;
     }

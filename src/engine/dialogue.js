@@ -25,14 +25,16 @@ class CanvasDialogueLabel extends CanvasText {
 class CanvasDialogueText extends CanvasText {
     fill = COLOR_WHITE;
     shadow = DEFAULT_SHADOW;
+    size = '16px';
     text = '';
+    typewriter = true;
 }
 
 export class CanvasDialogueBox extends CanvasRoundedBox {
     subObjects = {
         characterName: new CanvasDialogueLabel(''),
         dialogue: new CanvasDialogueText(''),
-        moreDialogueIndicator: new CanvasBox(COLOR_WHITE, 0, 0, 20, 20),
+        moreDialogueIndicator: new CanvasBox(COLOR_WHITE, 0, 0, 10, 10),
     };
     dialogue = [];
     index = 0;
@@ -41,6 +43,8 @@ export class CanvasDialogueBox extends CanvasRoundedBox {
     stroke = COLOR_WHITE;
     strokeWidth = 2;
     shadow = DEFAULT_SHADOW;
+    canvasContext;
+    typewriter = true;
 
     constructor(dialogue = [], x = 10, y = 10, width = 500, height = 100) {
         super();
@@ -70,6 +74,10 @@ export class CanvasDialogueBox extends CanvasRoundedBox {
 
             this.index++;
             this.loadCurrentLine();
+
+            if (this.canvasContext && this.typewriter) {
+                this.subObjects.dialogue.type(this.canvasContext);
+            }
             if (this.dialogue.length === this.index + 1) {
                 this.subObjects.moreDialogueIndicator.hide();
             } else {
@@ -78,11 +86,12 @@ export class CanvasDialogueBox extends CanvasRoundedBox {
         });
     }
 
-    init(canvas) {
+    init(canvas, ctx) {
+        this.canvasContext = ctx;
         this.width = (canvas.width / 2) - 20;
 
         this.subObjects.moreDialogueIndicator.x = (canvas.width / 4) - 20;
-        this.subObjects.moreDialogueIndicator.y = this.height - 30;
+        this.subObjects.moreDialogueIndicator.y = this.height - 20;
         this.subObjects.moreDialogueIndicator.flash(500);
     }
 

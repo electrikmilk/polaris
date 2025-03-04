@@ -1,16 +1,22 @@
 import {CanvasObject} from './object.js';
+import {CanvasBox} from './shapes.js';
 
 export class CanvasText extends CanvasObject {
-    order = 1;
+    order = 2;
     text = '';
+    saveText = '';
     maxWidth;
     font = 'Helvetica, sans-serif';
     size = '18px';
     styles = [];
     direction;
+    subObjects = {typewriterCursor: new CanvasBox('red', 0, 0, 50, 100)};
 
     textBaseline = 'top';
     textAlign = 'left';
+
+    typewriterCursor = 0;
+    typewriterInterval = null;
 
     constructor(text = 'Text', fill = null, x = 0, y = 0, maxWidth = null, font = 'Helvetica, sans-serif') {
         super();
@@ -22,6 +28,7 @@ export class CanvasText extends CanvasObject {
         this.x = x;
         this.y = y;
         this.subObjects.typewriterCursor.order = 1;
+        this.subObjects.typewriterCursor.hide();
     }
 
     render(ctx, canvas) {
@@ -51,7 +58,7 @@ export class CanvasText extends CanvasObject {
     getTextLines(ctx, canvas) {
         let lines = [];
 
-        const halfCanvasWidth = canvas.width / 2;
+        const halfCanvasWidth = canvas.width / 3;
         const words = this.text.split(' ');
         let current = words[0];
 
@@ -66,7 +73,24 @@ export class CanvasText extends CanvasObject {
         }
 
         lines.push(current);
+
         return lines;
+    }
+
+    type(ctx) {
+        this.typewriterCursor = 0;
+        this.saveText = this.text;
+        this.setText(ctx, '');
+        this.typewriterInterval = setInterval(() => {
+            if (this.text === this.saveText) {
+                clearInterval(this.typewriterInterval);
+                return;
+            }
+
+            this.setText(ctx, this.text + this.saveText[this.typewriterCursor]);
+            this.typewriterCursor++;
+            // TODO: Play sound.
+        }, 50);
     }
 
     renderText(ctx, canvas) {

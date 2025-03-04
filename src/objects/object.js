@@ -135,6 +135,28 @@ export class CanvasObject {
         this.y = ((canvas.height / 2) / 2) - (this.height / 2);
     }
 
+    calcPosition(canvas) {
+        const position = this.position.split(' ');
+        const y = position[0];
+        const x = position[1];
+        switch (y) {
+            case 'middle':
+                this.y = canvas.height / 4;
+                break;
+            case 'bottom':
+                this.y = canvas.height;
+                break;
+        }
+        switch (x) {
+            case 'center':
+                this.x = canvas.width / 4;
+                break;
+            case 'right':
+                this.x = canvas.width / 2;
+                break;
+        }
+    }
+
     preEffects(ctx, canvas) {
         if (this.angle) {
             ctx.rotate(this.angle * (Math.PI / 180));
@@ -142,27 +164,8 @@ export class CanvasObject {
         if (this.scale) {
             ctx.scale(this.scale, this.scale);
         }
-
         if (this.position) {
-            const position = this.position.split(' ');
-            const y = position[0];
-            const x = position[1];
-            switch (y) {
-                case 'middle':
-                    this.y = canvas.height / 4;
-                    break;
-                case 'bottom':
-                    this.y = canvas.height;
-                    break;
-            }
-            switch (x) {
-                case 'center':
-                    this.x = canvas.width / 4;
-                    break;
-                case 'right':
-                    this.x = canvas.width / 2;
-                    break;
-            }
+            this.calcPosition(canvas);
         }
 
         ctx.globalAlpha = this.opacity / 100;

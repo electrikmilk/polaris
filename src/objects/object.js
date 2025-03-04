@@ -33,6 +33,7 @@ export class CanvasObject {
     scale = 0;
     opacity = 100;
     margin = 20;
+    position = null;
 
     fill = COLOR_BLACK;
     stroke = COLOR_BLACK;
@@ -140,6 +141,28 @@ export class CanvasObject {
         }
         if (this.scale) {
             ctx.scale(this.scale, this.scale);
+        }
+
+        if (this.position) {
+            const position = this.position.split(' ');
+            const y = position[0];
+            const x = position[1];
+            switch (y) {
+                case 'middle':
+                    this.y = canvas.height / 4;
+                    break;
+                case 'bottom':
+                    this.y = canvas.height;
+                    break;
+            }
+            switch (x) {
+                case 'center':
+                    this.x = canvas.width / 4;
+                    break;
+                case 'right':
+                    this.x = canvas.width / 2;
+                    break;
+            }
         }
 
         ctx.globalAlpha = this.opacity / 100;

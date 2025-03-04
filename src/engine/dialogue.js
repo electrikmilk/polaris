@@ -27,7 +27,6 @@ class CanvasDialogueText extends CanvasText {
     shadow = DEFAULT_SHADOW;
     size = '16px';
     text = '';
-    typewriter = true;
 }
 
 export class CanvasDialogueBox extends CanvasRoundedBox {

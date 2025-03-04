@@ -111,7 +111,7 @@ export class CanvasRenderer {
             this.paintObject(object);
 
             if (!object.hidden && !Object.is(object.subObjects, {})) {
-                Object.values(object.subObjects).sort(((a, b) => a.order - b.order)).map(subObject => {
+                Object.values(object.subObjects).sort(((a, b) => a.order - b.order)).forEach(subObject => {
                     const newObject = subObject.clone();
                     newObject.x = object.x + subObject.x;
                     newObject.y = object.y + subObject.y;

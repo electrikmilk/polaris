@@ -7,8 +7,10 @@ export class CanvasText extends CanvasObject {
     font = 'Helvetica, sans-serif';
     size = '18px';
     styles = [];
-    position = 'left top';
     direction;
+
+    textBaseline = 'top';
+    textAlign = 'left';
 
     constructor(text = 'Text', fill = null, x = 0, y = 0, maxWidth = null, font = 'Helvetica, sans-serif') {
         super();
@@ -19,40 +21,15 @@ export class CanvasText extends CanvasObject {
         }
         this.x = x;
         this.y = y;
+        this.subObjects.typewriterCursor.order = 1;
     }
 
     render(ctx, canvas) {
-        let txt_x = this.x;
-        let txt_y = this.y;
-
         ctx.font = [this.styles.join(' '), this.size, this.font].join(' ');
-        if (this.position) {
-            let position = this.position.split(' ');
-            let x = position[0];
-            let y = position[1];
-            ctx.textAlign = x;
-            ctx.textBaseline = y;
-            switch (x) {
-                case 'center':
-                    txt_x = canvas.width / 2 + txt_x;
-                    break;
-                case 'right':
-                    txt_x = canvas.width - this.x;
-                    break;
-            }
-            switch (y) {
-                case 'middle':
-                    txt_y = canvas.height / 2 + txt_y;
-                    break;
-                case 'bottom':
-                    txt_y = canvas.height - this.y;
-                    break;
-            }
-        }
+
         if (this.direction) {
             ctx.direction = this.direction;
         }
-
         if (!this.width || !this.height) {
             this.resizeText(ctx);
         }
@@ -93,6 +70,9 @@ export class CanvasText extends CanvasObject {
     }
 
     renderText(ctx, canvas) {
+        ctx.textBaseline = this.textBaseline;
+        ctx.textAlign = this.textAlign;
+
         const lines = this.getTextLines(ctx, canvas);
         let x = this.x;
         let y = this.y;

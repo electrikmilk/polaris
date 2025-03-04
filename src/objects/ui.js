@@ -102,6 +102,7 @@ export class CanvasInput extends CanvasRoundedBox {
     strokeWidth = 1;
     cursorIndex = 0;
     maxTextWidth = 0;
+    cursor = 'text';
 
     constructor(placeholder = 'Click to type...', x = 0, y = 0) {
         super();
@@ -113,6 +114,8 @@ export class CanvasInput extends CanvasRoundedBox {
             placeholder: new CanvasText(placeholder, '#ababab', 15, 16, this.maxTextWidth),
             cursor: new CanvasBox(COLOR_BLACK, 15, 13, 1, 25),
         };
+        this.subObjects.text.cursor = 'text';
+        this.subObjects.placeholder.cursor = 'text';
         this.subObjects.cursor.hide();
         this.subObjects.cursor.flash(300);
         document.addEventListener('keypress', e => {

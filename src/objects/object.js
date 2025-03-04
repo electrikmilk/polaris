@@ -48,7 +48,7 @@ export class CanvasObject {
     debugColor = DEBUG_COLORS[randInt(0, 2)];
 
     // Runs before each draw frame.
-    tick() {
+    tick(ctx, canvas) {
         //
     }
 

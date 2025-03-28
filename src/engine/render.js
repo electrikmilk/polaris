@@ -92,8 +92,20 @@ export class CanvasRenderer {
 
     // Append a canvas object to the draw loop.
     append(...canvasObj) {
-        canvasObj.forEach(o => o.init(this.canvas, this.ctx));
+        canvasObj.forEach(obj => {
+            this.initObject(obj);
+        });
         this.objects.push(...canvasObj);
+    }
+
+    initObject(obj) {
+        obj.init(this.canvas, this.ctx);
+
+        if (Object.values(obj.subObjects).length) {
+            for (const subObj in obj.subObjects) {
+                this.initObject(obj.subObjects[subObj]);
+            }
+        }
     }
 
     // Initiate a canvas draw loop.
@@ -115,6 +127,7 @@ export class CanvasRenderer {
                     const newObject = subObject.clone();
                     newObject.x = object.x + subObject.x;
                     newObject.y = object.y + subObject.y;
+                    newObject.angle = object.angle + subObject.angle;
                     this.paintObject(newObject);
                 });
             }

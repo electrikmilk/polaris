@@ -101,7 +101,7 @@ export class CanvasRenderer {
     initObject(obj) {
         obj.init(this.canvas, this.ctx);
 
-        if (Object.values(obj.subObjects).length) {
+        if (!Object.is(obj.subObjects, {})) {
             for (const subObj in obj.subObjects) {
                 this.initObject(obj.subObjects[subObj]);
             }
@@ -121,16 +121,6 @@ export class CanvasRenderer {
 
         for (const object of this.sortedObjects()) {
             this.paintObject(object);
-
-            if (!object.hidden && !Object.is(object.subObjects, {})) {
-                Object.values(object.subObjects).sort(((a, b) => a.order - b.order)).forEach(subObject => {
-                    const newObject = subObject.clone();
-                    newObject.x = object.x + subObject.x;
-                    newObject.y = object.y + subObject.y;
-                    newObject.angle = object.angle + subObject.angle;
-                    this.paintObject(newObject);
-                });
-            }
         }
 
         this.restoreCtx();
@@ -164,6 +154,16 @@ export class CanvasRenderer {
         object.checkMouseStates(this.ctx, this.canvas);
 
         this.restoreCtx();
+
+        if (!object.hidden && !Object.is(object.subObjects, {})) {
+            Object.values(object.subObjects).sort(((a, b) => a.order - b.order)).forEach(subObject => {
+                const newObject = subObject.clone();
+                newObject.x = object.x + subObject.x;
+                newObject.y = object.y + subObject.y;
+                newObject.angle = object.angle + subObject.angle;
+                this.paintObject(newObject);
+            });
+        }
     }
 
     moveSolidObject(object, direction, amount) {

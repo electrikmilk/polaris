@@ -1,5 +1,7 @@
 # Polaris ✦
 
+[Docs](https://github.com/electrikmilk/polaris/wiki)
+
 Polaris is a WIP HTML5 canvas 2D game engine.
 
 Designed to be easy-to-use and quickly get started, the typical canvas draw loop is abstracted to make drawing on an HTML5 canvas feel more like manipulating HTML DOM.

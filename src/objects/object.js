@@ -195,7 +195,7 @@ export class CanvasObject {
             x: this.x + this.width + 10,
             y: this.y,
             width: 170,
-            height: 140,
+            height: 155,
             shape: 'rectangle',
         };
 
@@ -225,18 +225,20 @@ export class CanvasObject {
         ctx.save();
         ctx.beginPath();
 
-        new CanvasShadow(COLOR_WHITE, 20).render(ctx);
+        const shadow = new CanvasShadow(COLOR_WHITE, 20);
+        shadow.render(ctx);
 
         ctx.rect(debugBox.x, debugBox.y, debugBox.width, debugBox.height);
         ctx.fillStyle = this.debugColor;
-        ctx.globalAlpha = 0.5;
+        ctx.globalAlpha = 0.8;
         ctx.fill();
         ctx.globalAlpha = 1;
-        ctx.restore();
+        ctx.save();
+
         debugBox.x += 10;
 
-        ctx.save();
-        ctx.fillStyle = COLOR_WHITE;
+        ctx.restore();
+        ctx.fillStyle = COLOR_BLACK;
         ctx.font = '15px monospace';
         ctx.textAlign = 'top';
         ctx.textBaseline = 'top';
@@ -246,6 +248,7 @@ export class CanvasObject {
         ctx.fillText(`y: ${this.y}`, debugBox.x, debugBox.y + 70);
         ctx.fillText(`width: ${this.width}`, debugBox.x, debugBox.y + 90);
         ctx.fillText(`height: ${this.width}`, debugBox.x, debugBox.y + 110);
+        ctx.fillText(`opacity: ${this.opacity}`, debugBox.x, debugBox.y + 130);
         ctx.restore();
 
         ctx.save();

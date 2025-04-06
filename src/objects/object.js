@@ -370,6 +370,14 @@ export class CanvasObject {
         return new FadeOutAnimation(this).start();
     }
 
+    async toggleFade() {
+        if (this.opacity > 0) {
+            return this.fadeOut();
+        } else {
+            return this.fadeIn();
+        }
+    }
+
     init(canvas, ctx) {
         //
     }

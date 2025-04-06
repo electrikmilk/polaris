@@ -105,16 +105,25 @@ export class CanvasDialogueBox extends CanvasRoundedBox {
 
     loadCurrentLine() {
         const line = this.dialogue[this.index];
-        if (this.subObjects.hasOwnProperty('characterImage')) {
-            delete this.subObjects.characterImage;
+        if (this.subObjects.hasOwnProperty('image')) {
+            delete this.subObjects.image;
         }
 
         if (typeof line === 'object') {
-            this.subObjects.characterName.text = line.char.name;
+            if (line.hasOwnProperty('char')) {
+                const character = line.char;
+                if (character.hasOwnProperty('name')) {
+                    this.subObjects.characterName.text = line.char.name;
+                }
+                if (!line.hasOwnProperty('image') && character.hasOwnProperty('image')) {
+                    this.subObjects.image = new CanvasImage(line.char.image, this.width - 110, 0, 100, 100);
+                }
+            }
+
             this.subObjects.dialogue.text = line.text;
 
             if (line.hasOwnProperty('image')) {
-                this.subObjects.characterImage = new CanvasImage(line.image, this.width - 110, 0, 100, 100);
+                this.subObjects.image = new CanvasImage(line.image, this.width - 110, 0, 100, 100);
             }
         } else if (typeof line === 'string') {
             this.subObjects.characterName.text = '';

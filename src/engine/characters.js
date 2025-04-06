@@ -1,9 +1,9 @@
 export class Character {
     name;
-    images = [];
+    image = null;
 
-    constructor(name, images = []) {
+    constructor(name, image = null) {
         this.name = name;
-        this.images = images;
+        this.image = image;
     }
 }

@@ -239,7 +239,7 @@ export class CanvasObject {
         ctx.restore();
         ctx.fillStyle = COLOR_BLACK;
         ctx.font = '15px monospace';
-        ctx.textAlign = 'top';
+        ctx.textAlign = 'left';
         ctx.textBaseline = 'top';
         ctx.fillText(`invisible: ${this.invisible}`, debugBox.x, debugBox.y + 10);
         ctx.fillText(`hovering: ${this.hovering}`, debugBox.x, debugBox.y + 30);

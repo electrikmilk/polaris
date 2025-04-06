@@ -27,8 +27,8 @@ export class CanvasButton extends CanvasRoundedBox {
 
     init(canvas, ctx) {
         this.subObjects.text.render(ctx, canvas);
-        this.width = ctx.measureText(this.subObjects.text.text).width + 30;
-        this.height = Math.ceil(parseInt(this.subObjects.text.size)) + 30;
+        this.width = Math.ceil(ctx.measureText(this.subObjects.text.text).width + 30);
+        this.height = Math.ceil(parseInt(this.subObjects.text.size) + 30);
     }
 
     onHover(ctx, canvas) {

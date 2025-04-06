@@ -9,7 +9,7 @@ export * from './engine/util.js';
 
 /* Canvas */
 export * from './engine/animation.js';
-export * from './engine/physics.js';
+export * from './engine/collision.js';
 
 /* Objects */
 export * from './objects/object.js';

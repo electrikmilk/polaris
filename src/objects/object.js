@@ -3,7 +3,7 @@
  */
 
 import {COLOR_BLACK, COLOR_WHITE, DEBUG_COLORS, randInt} from '../engine/util.js';
-import {colliding} from '../engine/physics.js';
+import {colliding} from '../engine/collision.js';
 import {Mouse, MOUSE_DOWN, MOUSE_UP} from '../engine/mouse.js';
 import {FadeInAnimation, FadeOutAnimation} from '../engine/animation.js';
 import {CanvasShadow} from './object-effects.js';

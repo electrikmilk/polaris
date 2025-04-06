@@ -44,4 +44,4 @@ class RedBox extends CanvasBox {
 - Collision detection
 - Animation
 - UI (textbox, buttons, etc.)
-- Dialogue and characters system (WIP!)
+- Dialogue and characters system

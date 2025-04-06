@@ -22,3 +22,4 @@ export * from './objects/ui.js';
 /* Abstractions */
 export * from './engine/keyboard.js';
 export * from './engine/mouse.js';
+export * from './engine/gamepad.js';

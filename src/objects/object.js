@@ -301,6 +301,65 @@ export class CanvasObject {
         }
     }
 
+    move(renderer, direction, amount) {
+        let new_x = this.x;
+        let new_y = this.y;
+        let next_x = this.x;
+        let next_y = this.y;
+        switch (direction) {
+            case 'up':
+                new_y -= amount;
+                next_y -= amount - amount;
+                break;
+            case 'left':
+                new_x -= amount;
+                next_x -= amount - amount;
+                break;
+            case 'right':
+                new_x += amount;
+                next_x += amount + amount;
+                break;
+            case 'down':
+                new_y += amount;
+                next_y += amount + amount;
+                break;
+        }
+
+        let is_colliding = false;
+        if (this.solid === true) {
+            let new_position = {
+                x: next_x,
+                y: next_y,
+                width: this.width,
+                height: this.height,
+                shape: this.shape,
+            };
+
+            // check next position against other solid sprites
+            renderer.sortedObjects().filter(s => s !== this && s.solid).forEach((sprite) => {
+                is_colliding = colliding(new_position, sprite);
+            });
+
+            if (this.boundToViewport === true) {
+                let bound_x = new_x + this.width - amount;
+                let bound_y = new_y + this.height - amount;
+                if (bound_x >= this.width || bound_y >= this.height) {
+                    is_colliding = true;
+                }
+                if (next_x === 0 || next_y === 0) {
+                    is_colliding = true;
+                }
+            }
+            if (is_colliding) {
+                return;
+            }
+            // we aren't colliding with anything else solid, allow movement to the next position
+        }
+
+        this.x = new_x;
+        this.y = new_y;
+    }
+
     async fadeIn() {
         const diff = (100 - this.opacity) / 10 + 10;
         this.animation = new FadeInAnimation(this, diff).start();

@@ -4,7 +4,6 @@
 
 import {DEV_ENV, nextFrame} from './util.js';
 import {initMouse, Mouse} from './mouse.js';
-import {colliding} from './physics.js';
 
 export class CanvasRenderer {
     canvas;
@@ -161,65 +160,5 @@ export class CanvasRenderer {
                 this.paintObject(newObject);
             });
         }
-    }
-
-    moveSolidObject(object, direction, amount) {
-        let new_x = object.x;
-        let new_y = object.y;
-        let next_x = object.x;
-        let next_y = object.y;
-        switch (direction) {
-            case 'up':
-                new_y -= amount;
-                next_y -= amount - amount;
-                break;
-            case 'left':
-                new_x -= amount;
-                next_x -= amount - amount;
-                break;
-            case 'right':
-                new_x += amount;
-                next_x += amount + amount;
-                break;
-            case 'down':
-                new_y += amount;
-                next_y += amount + amount;
-                break;
-        }
-        // collision
-        let is_colliding = false;
-        if (object.solid === true) {
-            // describe next position
-            let new_position = {
-                x: next_x,
-                y: next_y,
-                width: object.width,
-                height: object.height,
-                shape: object.shape,
-            };
-            // check next position against other solid sprites
-            this.sortedObjects().filter(s => s !== object && s.solid).forEach((sprite) => {
-                is_colliding = colliding(new_position, sprite);
-            });
-            // bound to viewport
-            if (object.boundToViewport === true) {
-                let bound_x = new_x + object.width - amount;
-                let bound_y = new_y + object.height - amount;
-                if (bound_x >= this.width || bound_y >= this.height) {
-                    is_colliding = true;
-                }
-                if (next_x === 0 || next_y === 0) {
-                    is_colliding = true;
-                }
-            }
-            if (is_colliding) {
-                return;
-            }
-            // we aren't colliding with anything else solid, allow movement to the next position
-        }
-
-        // move to new position
-        object.x = new_x;
-        object.y = new_y;
     }
 }

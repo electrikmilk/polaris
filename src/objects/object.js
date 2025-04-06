@@ -208,10 +208,10 @@ export class CanvasObject {
         if (boundingY > halfCanvasHeight) {
             debugBox.y = halfCanvasHeight - debugBox.height;
         }
-        if (boundingX < 0) {
+        if (debugBox.x < 0) {
             debugBox.x = 0;
         }
-        if (boundingY < 0) {
+        if (debugBox.y < 0) {
             debugBox.y = 0;
         }
 

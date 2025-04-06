@@ -364,13 +364,11 @@ export class CanvasObject {
     }
 
     async fadeIn() {
-        const diff = (100 - this.opacity) / 10 + 10;
-        this.animation = new FadeInAnimation(this, diff).start();
+        this.animation = new FadeInAnimation(this).start();
     }
 
     async fadeOut() {
-        const diff = 100 - this.opacity;
-        this.animation = new FadeOutAnimation(this, diff).start();
+        this.animation = new FadeOutAnimation(this).start();
     }
 
     init(canvas, ctx) {

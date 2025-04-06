@@ -30,14 +30,6 @@ export class CanvasButton extends CanvasRoundedBox {
         this.width = Math.ceil(ctx.measureText(this.subObjects.text.text).width + 30);
         this.height = Math.ceil(parseInt(this.subObjects.text.size) + 30);
     }
-
-    onHover(ctx, canvas) {
-        this.opacity = 90;
-    }
-
-    onHoverEnd(ctx, canvas) {
-        this.opacity = 100;
-    }
 }
 
 const CHECKED_CHARACTER = '\u2715';
@@ -85,14 +77,6 @@ export class CanvasCheckbox extends CanvasRoundedBox {
 
     onChange(ctx, canvas) {
         //
-    }
-
-    onHover(ctx, canvas) {
-        this.opacity = 90;
-    }
-
-    onHoverEnd(ctx, canvas) {
-        this.opacity = 100;
     }
 }
 

@@ -41,7 +41,6 @@ export class CanvasObject {
     gradient;
     shadow;
 
-    animation;
     flashInterval = null;
 
     debug = false;
@@ -364,11 +363,11 @@ export class CanvasObject {
     }
 
     async fadeIn() {
-        this.animation = new FadeInAnimation(this).start();
+        return new FadeInAnimation(this).start();
     }
 
     async fadeOut() {
-        this.animation = new FadeOutAnimation(this).start();
+        return new FadeOutAnimation(this).start();
     }
 
     init(canvas, ctx) {

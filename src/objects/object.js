@@ -345,7 +345,7 @@ export class CanvasObject {
             if (this.boundToViewport === true) {
                 let bound_x = new_x + this.width - amount;
                 let bound_y = new_y + this.height - amount;
-                if (bound_x >= this.width || bound_y >= this.height) {
+                if (bound_x >= renderer.canvas.width / 2 || bound_y >= renderer.canvas.height / 2) {
                     is_colliding = true;
                 }
                 if (next_x === 0 || next_y === 0) {

@@ -161,4 +161,19 @@ export class CanvasRenderer {
             });
         }
     }
+
+    toggleFullscreen() {
+        if (window.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            const documentElement = document.documentElement;
+            if (documentElement.requestFullscreen) {
+                documentElement.requestFullscreen();
+            } else if (documentElement.webkitRequestFullscreen) {
+                documentElement.webkitRequestFullscreen();
+            } else if (documentElement.msRequestFullscreen) {
+                documentElement.msRequestFullscreen();
+            }
+        }
+    }
 }

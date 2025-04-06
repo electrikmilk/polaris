@@ -4,11 +4,11 @@
 
 Polaris is a WIP HTML5 canvas 2D game engine.
 
-Designed to be easy-to-use and quickly get started, the typical canvas draw loop is abstracted to make drawing on an HTML5 canvas feel more like manipulating HTML DOM.
+Designed to be easy-to-use and quick to get started, the typical canvas draw loop is abstracted to make drawing on an HTML5 canvas feel more like manipulating HTML DOM.
 
 **For example:**
 
-We create a game which we give a HTML selector for where the canvas should go and it's dimensions. We then provide the game with a starting scene which will be automatically loaded as it is the first scene. A scene is provided a renderer unique to that scene, the renderer class handles rendering to the canvas.
+We create a game for which we give an HTML selector for where the canvas should go and its dimensions. We then provide the game with a starting scene, which will be automatically loaded as it is the first scene. A scene is provided a renderer unique to that scene, the renderer class handles rendering to the canvas.
 
 ```javascript
 new Game('#game', 640, 480, {

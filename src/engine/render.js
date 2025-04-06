@@ -139,17 +139,16 @@ export class CanvasRenderer {
         }
 
         object.tick(this.ctx, this.canvas);
-        object.preEffects(this.ctx, this.canvas);
         if (!object.invisible) {
+            object.preEffects(this.ctx, this.canvas);
             object.render(this.ctx, this.canvas);
             object.postEffects(this.ctx);
+            object.checkMouseStates(this.ctx, this.canvas);
         }
 
         if (object.debug && DEV_ENV) {
             object.renderDebug(this.ctx, this.canvas);
         }
-
-        object.checkMouseStates(this.ctx, this.canvas);
 
         this.restoreCtx();
 

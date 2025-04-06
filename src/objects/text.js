@@ -31,6 +31,10 @@ export class CanvasText extends CanvasObject {
         this.subObjects.typewriterCursor.hide();
     }
 
+    init(canvas, ctx) {
+        this.resizeText(ctx);
+    }
+
     render(ctx, canvas) {
         ctx.font = [this.styles.join(' '), this.size, this.font].join(' ');
 
@@ -51,7 +55,7 @@ export class CanvasText extends CanvasObject {
     }
 
     resizeText(ctx) {
-        this.width = Math.ceil(this.measure(ctx).width + 50);
+        this.width = Math.floor(this.measure(ctx).width);
         this.height = Math.ceil(parseInt(this.size));
     }
 

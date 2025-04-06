@@ -237,7 +237,7 @@ export class CanvasObject {
 
         ctx.save();
         ctx.fillStyle = COLOR_WHITE;
-        ctx.font = '16px \'Courier, monospace\'';
+        ctx.font = '15px monospace';
         ctx.textAlign = 'top';
         ctx.textBaseline = 'top';
         ctx.fillText(`invisible: ${this.invisible}`, debugBox.x, debugBox.y + 10);

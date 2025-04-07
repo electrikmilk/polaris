@@ -202,12 +202,4 @@ export class CanvasInput extends CanvasRoundedBox {
         this.focused = false;
         this.subObjects.cursor.hidden = true;
     }
-
-    onHover(ctx, canvas) {
-        this.opacity = 90;
-    }
-
-    onHoverEnd(ctx, canvas) {
-        this.opacity = 100;
-    }
 }

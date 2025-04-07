@@ -5,6 +5,7 @@ export const DEBUG_COLORS = ['#ff00ff', '#00bbff', '#00ff0e'];
 export const COLOR_BLACK = '#121212';
 export const COLOR_WHITE = '#fafafa';
 export const COLOR_ORANGE = '#f17619';
+export const COLOR_GRAY = '#c7c7c7';
 export const DEFAULT_SHADOW = new CanvasShadow('rgba(0,0,0,0.3)', 10);
 
 export async function sleep(ms) {

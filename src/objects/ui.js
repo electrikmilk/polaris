@@ -1,6 +1,7 @@
-import {COLOR_BLACK, COLOR_ORANGE, COLOR_WHITE, DEFAULT_SHADOW, empty} from '../engine/util.js';
+import {COLOR_BLACK, COLOR_GRAY, COLOR_ORANGE, COLOR_WHITE, DEFAULT_SHADOW, empty} from '../engine/util.js';
 import {CanvasBox, CanvasRoundedBox} from './shapes.js';
 import {CanvasText} from './text.js';
+import {CanvasObject} from '../main.js';
 
 export class CanvasButton extends CanvasRoundedBox {
     fill = COLOR_ORANGE;
@@ -86,8 +87,8 @@ export class CanvasInput extends CanvasRoundedBox {
     shadow = DEFAULT_SHADOW;
     focused = false;
     value = '';
-    stroke = '#c7c7c7';
-    strokeWidth = 1;
+    stroke = COLOR_GRAY;
+    strokeWidth = 2;
     cursorIndex = 0;
     maxTextWidth = 0;
     cursor = 'text';
@@ -195,11 +196,24 @@ export class CanvasInput extends CanvasRoundedBox {
 
     onClick(ctx, canvas) {
         this.focused = true;
+        this.stroke = 'dodgerblue';
         this.subObjects.cursor.hidden = false;
     }
 
     onClickOutside(ctx, canvas) {
         this.focused = false;
+        this.stroke = COLOR_GRAY;
         this.subObjects.cursor.hidden = true;
+    }
+}
+
+export class CanvasForm extends CanvasObject {
+    constructor(objects = {}) {
+        super();
+        let height = 20;
+        for (const object in objects) {
+            objects[object].y += objects[object].height + (height += 60);
+        }
+        Object.assign(this.subObjects, objects);
     }
 }

@@ -131,10 +131,8 @@ export class CanvasObject {
     }
 
     centerRelative(object) {
-        // this.x = (object.width / 2) - (this.width);
-        // this.y = (object.height / 2) - (this.height / 2);
-        // this.x = object.width / 2 - (this.width / 2);
-        console.log(this.width, this.text);
+        this.x = (object.width / 2) - (this.width);
+        this.y = (object.height / 2) - (this.height / 2);
     }
 
     calcPosition(canvas) {

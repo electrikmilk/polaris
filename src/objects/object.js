@@ -130,24 +130,31 @@ export class CanvasObject {
         this.y = (canvas.height / 4) - (this.height / 2);
     }
 
+    centerRelative(object) {
+        // this.x = (object.width / 2) - (this.width);
+        // this.y = (object.height / 2) - (this.height / 2);
+        // this.x = object.width / 2 - (this.width / 2);
+        console.log(this.width, this.text);
+    }
+
     calcPosition(canvas) {
         const position = this.position.split(' ');
         const y = position[0];
         const x = position[1];
         switch (y) {
             case 'center':
-                this.y = (canvas.height / 4) - (this.height / 2);
+                this.y = Math.floor((canvas.height / 4) - this.height);
                 break;
             case 'bottom':
-                this.y = (canvas.height / 4) - (this.height / 2);
+                this.y = (canvas.height / 2) - this.height;
                 break;
         }
         switch (x) {
             case 'center':
-                this.x = (canvas.width / 4) - (this.width / 2);
+                this.x = Math.floor((canvas.width / 4) - (this.width / 2));
                 break;
             case 'right':
-                this.x = (canvas.width / 4) - (this.width / 2);
+                this.x = (canvas.width / 2) - this.width;
                 break;
         }
     }

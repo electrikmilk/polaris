@@ -92,6 +92,8 @@ export class CanvasDialogueBox extends CanvasRoundedBox {
         this.subObjects.moreDialogueIndicator.x = (canvas.width / 4) - 20;
         this.subObjects.moreDialogueIndicator.y = this.height - 20;
         this.subObjects.moreDialogueIndicator.flash(500);
+        
+        this.subObjects.dialogue.type(this.canvasContext);
     }
 
     load(dialogue) {

@@ -51,8 +51,8 @@ export class CanvasText extends CanvasObject {
     }
 
     resizeText(ctx) {
-        this.width = Math.floor(this.measure(ctx).width);
         this.height = Math.ceil(parseInt(this.size));
+        this.width = Math.floor(this.measure(ctx).width + this.height + 15);
     }
 
     getTextLines(ctx, canvas) {

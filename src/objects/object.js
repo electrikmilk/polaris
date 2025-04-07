@@ -136,7 +136,7 @@ export class CanvasObject {
     }
 
     centerRelative(object) {
-        this.x = (object.width / 2) - (this.width);
+        this.x = (object.width / 2) - (this.width / 2);
         this.y = (object.height / 2) - (this.height / 2);
     }
 

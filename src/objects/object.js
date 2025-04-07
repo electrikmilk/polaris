@@ -33,7 +33,7 @@ export class CanvasObject {
     angle = 0;
     scale = 0;
     opacity = 100;
-    margin = 20;
+    margin = 0;
     position = null;
 
     fill = COLOR_BLACK;
@@ -145,19 +145,25 @@ export class CanvasObject {
         const y = position[0];
         const x = position[1];
         switch (y) {
+            case 'top':
+                this.y = this.margin;
+                break;
             case 'center':
                 this.y = Math.floor((canvas.height / 4) - this.height);
                 break;
             case 'bottom':
-                this.y = (canvas.height / 2) - this.height;
+                this.y = Math.floor((canvas.height / 2) - this.height - this.margin);
                 break;
         }
         switch (x) {
+            case 'left':
+                this.x = this.margin;
+                break;
             case 'center':
                 this.x = Math.floor((canvas.width / 4) - (this.width / 2));
                 break;
             case 'right':
-                this.x = (canvas.width / 2) - this.width;
+                this.x = this.safeAreaRight(canvas);
                 break;
         }
     }

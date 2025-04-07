@@ -137,6 +137,7 @@ export class CanvasRenderer {
             object.y = Mouse.y - object.height / 2;
         }
 
+        object.objectTick++;
         object.tick(this.ctx, this.canvas);
         if (!object.invisible) {
             object.preEffects(this.ctx, this.canvas);

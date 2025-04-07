@@ -27,6 +27,7 @@ export class CanvasObject {
     order = 0;
     x = 0;
     y = 0;
+    objectTick = 0;
     width = 0;
     height = 0;
     angle = 0;
@@ -53,6 +54,10 @@ export class CanvasObject {
 
     clone() {
         return Object.assign(Object.create(Object.getPrototypeOf(this)), this);
+    }
+
+    isFirstTick() {
+        return this.objectTick === 1;
     }
 
     safeAreaTop() {

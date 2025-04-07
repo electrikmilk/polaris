@@ -63,6 +63,9 @@ export class Game {
     }
 
     loadScene(key) {
+        if (this.scenes[key] === undefined) {
+            throw new Error(`Scene '${key}' does not exist!`);
+        }
         this.load(this.scenes[key]);
     }
 

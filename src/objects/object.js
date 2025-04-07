@@ -126,8 +126,8 @@ export class CanvasObject {
     }
 
     center(canvas) {
-        this.x = ((canvas.width / 2) / 2) - (this.width / 2);
-        this.y = ((canvas.height / 2) / 2) - (this.height / 2);
+        this.x = (canvas.width / 4) - (this.width / 2);
+        this.y = (canvas.height / 4) - (this.height / 2);
     }
 
     calcPosition(canvas) {
@@ -135,19 +135,19 @@ export class CanvasObject {
         const y = position[0];
         const x = position[1];
         switch (y) {
-            case 'middle':
-                this.y = canvas.height / 4;
+            case 'center':
+                this.y = (canvas.height / 4) - (this.height / 2);
                 break;
             case 'bottom':
-                this.y = canvas.height;
+                this.y = (canvas.height / 4) - (this.height / 2);
                 break;
         }
         switch (x) {
             case 'center':
-                this.x = canvas.width / 4;
+                this.x = (canvas.width / 4) - (this.width / 2);
                 break;
             case 'right':
-                this.x = canvas.width / 2;
+                this.x = (canvas.width / 4) - (this.width / 2);
                 break;
         }
     }

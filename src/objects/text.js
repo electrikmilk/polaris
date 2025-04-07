@@ -1,5 +1,4 @@
 import {CanvasObject} from './object.js';
-import {CanvasBox} from './shapes.js';
 
 export class CanvasText extends CanvasObject {
     order = 2;
@@ -10,7 +9,6 @@ export class CanvasText extends CanvasObject {
     size = '18px';
     styles = [];
     direction;
-    subObjects = {typewriterCursor: new CanvasBox('red', 0, 0, 50, 100)};
 
     textBaseline = 'top';
     textAlign = 'left';
@@ -27,8 +25,6 @@ export class CanvasText extends CanvasObject {
         }
         this.x = x;
         this.y = y;
-        this.subObjects.typewriterCursor.order = 1;
-        this.subObjects.typewriterCursor.hide();
     }
 
     init(canvas, ctx) {
